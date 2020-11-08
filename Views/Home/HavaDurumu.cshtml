@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "HavaDurumu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Styles.Render("~/Content/style.css")
+}
+@model HavaDurumuUygulaması.Models.HavaDurumu
+<div class="forecast-table" style="padding-top:200px">
+    <div class="container">
+        <div class="forecast-container">
+            <div class="today forecast">
+                <div class="forecast-header">
+                    <div class="day">@Model.result[0].Day</div>
+                    <div class="date">@Model.result[0].Date</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="location">@Model.city.ToString().ToUpper()</div>
+                    <div class="degree">
+                        <div class="num">@Model.result[0].Degree.Split('.')[0]<sup>o</sup>C</div>
+                        <div class="forecast-icon">
+                            <img src="@Model.result[0].Icon" alt="" width=90>
+                        </div>
+                    </div>
+                    <span>@*<img src="images/icon-umberella.png" alt="">*@ Durum: @Model.result[0].Description</span>
+                    <span>@*<img src="images/icon-wind.png" alt="">*@ Min: @Model.result[0].Min.Split('.')[0]</span>
+                    <span>@*<img src="images/icon-compass.png" alt="">*@ Max: @Model.result[0].Max.Split('.')[0]</span>
+                </div>
+            </div>
+            @for (int i = 1; i < Model.result.Length; i++)
+            {
+                <div class="forecast">
+                    <div class="forecast-header">
+                        <div class="day">@Model.result[i].Day</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                        <div class="forecast-icon">
+                            <img src="@Model.result[i].Icon" alt="" width=48>
+                        </div>
+                        <div class="degree">@Model.result[i].Degree.Split('.')[0]<sup>o</sup>C</div>
+                        <small>@Model.result[i].Night.Split('.')[0]<sup>o</sup></small>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
